@@ -1,4 +1,4 @@
-package com.shtramak.glprocamp.threadpool;
+package com.shtramak.glprocamp.threadpool.executor;
 
 import com.shtramak.glprocamp.threadpool.exception.WorkQueueIsFullException;
 

@@ -4,7 +4,7 @@ public class WorkQueueIsFullException extends RuntimeException {
     public WorkQueueIsFullException() {
     }
 
-    public WorkQueueIsFullException(String message, Throwable cause) {
-        super(message, cause);
+    public WorkQueueIsFullException(String message) {
+        super(message);
     }
 }
