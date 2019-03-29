@@ -8,17 +8,17 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class MyBlockingQueueTest {
+class ThreadSafeQueueTest {
 
-    private MyBlockingQueue queue;
+    private ThreadSafeDeque queue;
 
     @BeforeEach
     void setUp() {
-        queue = new MyBlockingQueue();
+        queue = new ThreadSafeDeque();
     }
 
     @Test
-    void testAddOneElement() {
+    void addOneElement() {
         TestRunnable element = new TestRunnable(1);
         queue.add(element);
         assertEquals(1,queue.size);
@@ -28,7 +28,7 @@ class MyBlockingQueueTest {
     }
 
     @Test
-    void testAddThreeElement() {
+    void addThreeElement() {
         TestRunnable element1 = new TestRunnable(1);
         TestRunnable element2 = new TestRunnable(2);
         TestRunnable element3 = new TestRunnable(3);
@@ -42,7 +42,7 @@ class MyBlockingQueueTest {
         assertNull(queue.head.next);
         assertNull(queue.tail.previous);
 
-        MyBlockingQueue.Node secondNode = queue.head.previous;
+        ThreadSafeDeque.Node secondNode = queue.head.previous;
         assertEquals(element2,secondNode.element);
         assertEquals(element1,secondNode.next.element);
         assertEquals(element3,secondNode.previous.element);
@@ -75,12 +75,12 @@ class MyBlockingQueueTest {
     }
 
     @Test
-    void testSizeWhenEmpty() {
+    void sizeWhenEmpty() {
         assertEquals(0,queue.size);
     }
 
     @Test
-    void testSizeWithThreeElement() {
+    void sizeWithThreeElement() {
         addThreeElements();
         assertEquals(3,queue.size);
     }
@@ -94,6 +94,16 @@ class MyBlockingQueueTest {
     void isEmptyWhenNotEmpty() {
         addThreeElements();
         assertFalse(queue.isEmpty());
+    }
+
+    @Test
+    void clear() {
+        addThreeElements();
+        assertEquals(3,queue.size);
+        queue.clear();
+        assertEquals(0,queue.size);
+        assertNull(queue.head);
+        assertNull(queue.tail);
     }
 
     private void addThreeElements(){

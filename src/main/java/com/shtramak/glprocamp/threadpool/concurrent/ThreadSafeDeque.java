@@ -1,12 +1,12 @@
 package com.shtramak.glprocamp.threadpool.concurrent;
 
-public class MyBlockingQueue {
+public class ThreadSafeDeque {
     static class Node {
         Runnable element;
         Node next;
         Node previous;
 
-        public Node(Runnable element) {
+        Node(Runnable element) {
             this.element = element;
         }
     }
@@ -47,5 +47,10 @@ public class MyBlockingQueue {
 
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    public void clear() {
+        head = tail = null;
+        size = 0;
     }
 }
