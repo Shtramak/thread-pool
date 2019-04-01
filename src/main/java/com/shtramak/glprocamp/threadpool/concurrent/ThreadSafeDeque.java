@@ -13,7 +13,7 @@ public class ThreadSafeDeque {
 
     Node head;
     Node tail;
-    int size;
+    volatile int size;
 
 
     public synchronized void add(Runnable element) {
@@ -49,7 +49,7 @@ public class ThreadSafeDeque {
         return size == 0;
     }
 
-    public void clear() {
+    public synchronized void clear() {
         head = tail = null;
         size = 0;
     }
